@@ -7,7 +7,7 @@ var htmlmin = require('gulp-htmlmin');
 gulp.task('default', ['html','css', 'js'])
 
 gulp.task('css', function (){
-  gulp.src('./sass/styles.scss')
+  gulp.src('./main.css')
   .pipe(sass())
   .pipe(gulp.dest('./public'))
 });
@@ -20,14 +20,14 @@ gulp.task('html', function(){
 });
 
 gulp.task('js', function(){
-  gulp.src('./js/*.js')
+  gulp.src('./*.js')
     .pipe(browserify())
     .pipe(gulp.dest('./public'))
 });
 
 gulp.task('watch', function(){
-  gulp.watch('./sass/*.scss', ['css']);
+  gulp.watch('./*.css', ['css']);
   gulp.watch('./index.html', ['html']);
-  gulp.watch('./js/*.js', ['js']);
-  gulp.watch('./js/*/*.js', ['js']);
+  gulp.watch('./*.js', ['js']);
+  // gulp.watch('./js/*/*.js', ['js']);
 });
