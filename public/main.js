@@ -11,12 +11,12 @@ app.controller('JeopardyController', function($scope, $http) {
 
     $scope.score = 0,
 
-    $scope.newQuestion = {
-        answer: 'answer to question',
-        question: 'random',
-        value: 0,
-        category: 'category',
-    };
+        $scope.newQuestion = {
+            answer: 'answer to question',
+            question: 'random',
+            value: 0,
+            category: 'category',
+        };
 
     $scope.newQ = function() {
         console.log('clickin');
@@ -39,10 +39,12 @@ app.controller('JeopardyController', function($scope, $http) {
         $scope.score = $scope.newQuestion.value;
         console.log($scope.newQuestion.answer);
         if ($scope.humananswer === $scope.newQuestion.answer) {
-          $scope.score + $scope.newQuestion.value;
+            var a = Number($scope.newQuestion.value || 0);
+            $scope.score = a + a;
         } else {
             console.log('wrongggggggg');
-            $scope.newQuestion.value - $scope.newQuestion.value;
+            var a = Number($scope.newQuestion.value || 0);
+            $scope.score = a - a;
         }
     }
 });
