@@ -4,7 +4,7 @@
     <ul ng-repeat="category in categories">
         <li>{{category.title}}</li>
         <ul ng-repeat="val in values track by $index">
-          <li><a href="">{{val}}</a></li>
+          <li><a href="" ng-click="valueClick()">{{val}}</a></li>
         </ul>
     </ul>
 
