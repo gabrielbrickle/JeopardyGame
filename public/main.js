@@ -28,9 +28,10 @@ app.controller('JeopardyController', ['QuestionService', '$scope', function(Ques
 
     $scope.score = 0,
 
-        $scope.categories = QuestionService.getCategories();
+    $scope.categories = QuestionService.getCategories();
 
     $scope.values = QuestionService.getValues();
+
 
     // $scope.id= QuestionService.getValues();
 
@@ -65,33 +66,35 @@ app.controller('JeopardyController', ['QuestionService', '$scope', function(Ques
 
 
 
-app.controller('LoginController', function($scope, $http) {
-    // let passcode = 'GABE';
-    // $scope.newUser = {
-    //   username: "",
-    // }
-    // $scope.username = "";
-    // $scope.password = "";
-    // $scope.loginClick = function(){
-    //   $scope.username = $scope.newUser.username;
-    //   if ($scope.password === passcode) {
-    //     /////let user move to game view
-    //   } else {
-    //     alert('Your Password is Incorrect, Try Again!')
-    //   }
-    // }
-});
+app.controller('LoginController',['UserService', '$scope', '$location', function(UserService, $scope, $location) {
+    let passcode = 'GABE';
+    $scope.newUser = {
+      username: "",
+    }
+    $scope.username = "";
+    $scope.password = "";
+    $scope.loginClick = function(){
+      $scope.username = $scope.newUser.username;
+      if ($scope.password === passcode) {
+        console.log('good password');
+        $location.path('/game') ////DOESNT WORK
+      } else {
+        alert('Your Password is Incorrect, Try Again!')
+      }
+    }
+}]);
 
 app.controller('GameOverController', function($scope, $http) {});
 
 //////SERVICES//////////////////////////////////////////////////////////////////////////////////////
 app.factory('UserService', function($http) {
-    // let user = [];
-    //
-    // return  {
-    //   addUser: function (name) {
-    //           user.push(name);
-    //       },
+    let user = [];
+
+    return  {
+      addUser: function (name) {
+              user.push(name);
+          },
+        }
 });
 
 
@@ -114,7 +117,7 @@ app.factory('QuestionService', function($http) {
 
     let getValues = function() {
         id.forEach(function(element) {
-            console.log('heererere');
+            console.log('id number');
             $http({
                 method: 'GET',
                 url: `http://jservice.io/api/clues?category=${element}`,
@@ -122,7 +125,7 @@ app.factory('QuestionService', function($http) {
                 let valueText = response.data;
                 valueText.forEach(function(element) {
                     values.push(element.value);
-                    console.log(values);
+                    console.log('ALLLLL the values',values);
                 })
             })
         })
@@ -133,7 +136,9 @@ app.factory('QuestionService', function($http) {
         getCategories: function() {
             return categories;
         },
-        getValues: getValues
+        getValues: function(){
+          return values;
+        },
     };
 
 

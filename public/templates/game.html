@@ -4,8 +4,8 @@
     <ul ng-repeat="category in categories">
         <li>{{category.title}}</li>
     </ul>
-    <ul ng-repeat="val in values">
-      <li>{{val.value}}</li>
+    <ul ng-repeat="val in values track by $index">
+      <li><a href="">{{val}}</a></li>
     </ul>
 
     <h2>YOU'VE CHOSEN:<br> {{newQuestion.question}}<br> FOR: ${{newQuestion.value}}</h2>
