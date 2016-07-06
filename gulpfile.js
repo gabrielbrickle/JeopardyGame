@@ -12,12 +12,6 @@ gulp.task('css', function (){
   .pipe(gulp.dest('./public'))
 });
 
-// gulp.task('html', function(){
-//   gulp.src('./index.html')
-//     // .pipe(htmlhint())
-//     .pipe(htmlmin({collapseWhitespace:true}))
-//     .pipe(gulp.dest('./public'))
-// });
 
 gulp.task('html', function () {
     gulp.src('./templates/*.html').pipe(gulp.dest('./public/templates'));

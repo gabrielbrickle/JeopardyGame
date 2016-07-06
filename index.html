@@ -9,38 +9,23 @@
 </head>
 
 <body>
-  <audio controls autoplay loop>
+  <!-- <audio controls autoplay loop>
 <source src="song/Jeopardy-theme-song.mp3" type="audio/mpeg">
-\</audio>
-<!-- <nav>
+\</audio> -->
+
+<nav>
   <ul>
-    <li><a href="#login">Sign In</a></li>//////
-    <li><a href="#game">Play Jeopardy</a></li>///////
-    <li><a href="#gameover">Game Over</a></li>///////
+    <li><a href="#login">Sign In</a></li>
+    <li><a href="#game">Play Jeopardy</a></li>
+    <li><a href="#gameover">Game Over</a></li>
   </ul>
 </nav>
-<main ng-view></main> -->
+<main ng-view></main>
 
 
-<div class="maincontainer">
+<!-- <div class="maincontainer">
 
-
-    <section ng-controller="JeopardyController">
-        <h5>Score: {{score}}</h5>
-
-        <h2>YOU'VE CHOSEN:<br> {{newQuestion.question}}<br> FOR: ${{newQuestion.value}}</h2>
-        <input type="text" ng-model="humananswer">
-        <button ng-click="answerClick()">Answer</button>
-        <button ng-click="newQ()">Get A New Question</button>
-        <h2>Your Answer: {{humananswer}}</h2>
-        <h2>Correct Answer: {{answer}}</h2>
-        <h3>Previous Questions:</h3>
-        <ul ng-repeat="question in arrayOfQuestionHistory">
-            <li>{{question.question}}</li>
-        </ul>
-    </section>
-
-</div>
+</div> -->
     <script src="http://underscorejs.org/underscore-min.js"></script>
     <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.min.js" charset="utf-8"></script>

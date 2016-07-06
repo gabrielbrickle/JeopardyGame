@@ -1,8 +1,25 @@
-let app = angular.module('Jeopardy', []);
-
-app.controller('JeopardyController', function($scope, $http) {
-
-    $scope.arrayOfQuestionHistory = [];
+let app = angular.module('Jeopardy', ['ngRoute']);
+////////////////ROUTER//////////////////////////////////////////////////////////////
+app.config(['$routeProvider', function($routeProvider) {
+    $routeProvider
+        .when('/', {
+            redirectTo: '/login',
+        })
+        .when('/game', {
+            controller: 'JeopardyController',
+            templateUrl: 'templates/game.html',
+        })
+        .when('/login', {
+            controller: 'LoginController',
+            templateUrl: 'templates/login.html',
+        })
+        .when('/gameover', {
+            controller: 'GameOverController',
+            templateUrl: 'templates/gameover.html',
+        });
+}]);
+///////////CONTROLLERS////////////////////////////////////////////////////////////////
+app.controller('JeopardyController', ['QuestionService', '$scope', function(QuestionService, $scope) {
 
     $scope.humananswer = "";
 
@@ -10,26 +27,21 @@ app.controller('JeopardyController', function($scope, $http) {
 
     $scope.score = 0,
 
-        $scope.newQuestion = {
-            answer: 'answer to question',
-            question: 'random',
-            value: 0,
-            category: 'category',
-        };
+        $scope.categories = QuestionService.getCategories();
 
+    $scope.values = QuestionService.getValues();
+
+    // $scope.id= QuestionService.getValues();
+
+    $scope.newQuestion = {
+        answer: 'answer to question',
+        question: 'random',
+        value: 0,
+        category: 'category',
+    };
     $scope.newQ = function() {
         console.log('clickin');
-        $http({
-            method: 'GET',
-            url: 'http://jservice.io/api/random',
-        }).then(function(response) {
-            console.log(response);
-            $scope.newQuestion = response.data[0];
-            console.log($scope.newQuestion);
-            $scope.arrayOfQuestionHistory.push({
-                question: $scope.newQuestion.question
-            });
-        });
+
     };
     $scope.newQ();
 
@@ -47,4 +59,82 @@ app.controller('JeopardyController', function($scope, $http) {
             $scope.score = b
         }
     }
+
+}]);
+
+
+
+app.controller('LoginController', function($scope, $http) {
+    // let passcode = 'GABE';
+    // $scope.newUser = {
+    //   username: "",
+    // }
+    // $scope.username = "";
+    // $scope.password = "";
+    // $scope.loginClick = function(){
+    //   $scope.username = $scope.newUser.username;
+    //   if ($scope.password === passcode) {
+    //     /////let user move to game view
+    //   } else {
+    //     alert('Your Password is Incorrect, Try Again!')
+    //   }
+    // }
+});
+
+app.controller('GameOverController', function($scope, $http) {});
+
+//////SERVICES//////////////////////////////////////////////////////////////////////////////////////
+app.factory('UserService', function($http) {
+    // let user = [];
+    //
+    // return  {
+    //   addUser: function (name) {
+    //           user.push(name);
+    //       },
+});
+
+
+app.factory('QuestionService', function($http) {
+    let categories = [];
+    let values = [];
+    let id = [];
+
+    $http({
+        method: 'GET',
+        url: 'http://jservice.io/api/categories?count=5',
+    }).then(function(response) {
+        let categoryObject = response.data;
+        angular.copy(categoryObject, categories)
+        categories.forEach(function(element) {
+            id.push(element.id);
+        })
+        getValues();
+    });
+
+    let getValues = function() {
+        id.forEach(function(element) {
+            console.log('heererere');
+            $http({
+                method: 'GET',
+                url: `http://jservice.io/api/clues?category=${element}`,
+            }).then(function(response) {
+                let valueText = response.data;
+                valueText.forEach(function(element) {
+                    values.push(element.value);
+                    console.log(values);
+                })
+            })
+        })
+    };
+
+
+    return {
+        getCategories: function() {
+            return categories;
+        },
+        getValues: getValues
+    };
+
+
+
 });
