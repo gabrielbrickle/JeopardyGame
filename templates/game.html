@@ -3,10 +3,11 @@
     <h3>CATEGORIES:</h3>
     <ul ng-repeat="category in categories">
         <li>{{category.title}}</li>
+        <ul ng-repeat="val in values track by $index">
+          <li><a href="">{{val}}</a></li>
+        </ul>
     </ul>
-    <ul ng-repeat="val in values track by $index">
-      <li><a href="">{{val}}</a></li>
-    </ul>
+
 
     <h2>YOU'VE CHOSEN:<br> {{newQuestion.question}}<br> FOR: ${{newQuestion.value}}</h2>
     <input type="text" ng-model="humananswer">
