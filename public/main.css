@@ -1,0 +1,29 @@
+body {
+  background: url(https://lh5.ggpht.com/bqLqUYN4N4e_p56jLQVMwCI8GJ_rxX0-7Xf0c9eSlMhK8umwefrd2Vu7m0lc7in8q31q=h900) no-repeat 50% 20% fixed;
+  background-size: cover;
+  background-position: left; }
+
+h5 {
+  float: right;
+  color: #fff;
+  margin-right: 2%;
+  margin-top: -8%;
+  font-size: 36px; }
+
+h2 {
+  color: #fff;
+  font-family: 'Nunito', sans-serif;
+  text-align: left; }
+
+h3, ul {
+  color: white; }
+
+ul {
+  overflow: scroll; }
+
+.maincontainer {
+  width: 60%;
+  margin-left: 20%;
+  border: solid 4px #fff;
+  padding-top: 50px;
+  background: rgba(0, 0, 0, 0.7); }

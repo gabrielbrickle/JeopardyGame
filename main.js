@@ -35,15 +35,16 @@ app.controller('JeopardyController', function($scope, $http) {
 
     $scope.answerClick = function() {
         $scope.answer = $scope.newQuestion.answer;
-        $scope.score = $scope.newQuestion.value;
+        // $scope.score = $scope.newQuestion.value;
         console.log($scope.newQuestion.answer);
         if ($scope.humananswer === $scope.newQuestion.answer) {
-            var a = Number($scope.newQuestion.value || 0);
-            $scope.score = a + a;
+            let a = Number($scope.newQuestion.value + $scope.score)
+            $scope.score = a
+
         } else {
             console.log('wrongggggggg');
-            var a = Number($scope.newQuestion.value || 0);
-            $scope.score = a - a;
+            let b = Number($scope.score - $scope.newQuestion.value)
+            $scope.score = b
         }
     }
 });
