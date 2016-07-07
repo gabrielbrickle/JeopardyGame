@@ -1,19 +1,21 @@
-<!-- <section ng-controller="JeopardyController"> -->
+<div class="maincontainer">
+
     <h5>Score: {{score}}</h5>
-    <h3>CATEGORIES:</h3>
+  <div class="categorydiv">
+
     <ul ng-repeat="category in categories">
         <li>{{category.title}}</li>
-        <ul ng-repeat="val in values track by $index">
-          <li><a href="" ng-click="valueClick()">{{val}}</a></li>
+        <ul ng-repeat="val in values | limitTo:5 track by $index ">
+          <li><a href="" ng-click="valueClick()">${{val}}</a></li>
         </ul>
     </ul>
+  </div>
 
-
-    <h2>YOU'VE CHOSEN:<br> {{newQuestion.question}}<br> FOR: ${{newQuestion.value}}</h2>
+    <h2>YOU'VE CHOSEN:
+      <!-- <br> {{questions}}<br> FOR: ${{values}}</h2> -->
     <input type="text" ng-model="humananswer">
     <button ng-click="answerClick()">Answer</button>
     <button ng-click="newQ()">Get A New Question</button>
     <h2>Your Answer: {{humananswer}}</h2>
     <h2>Correct Answer: {{answer}}</h2>
-
-<!-- </section> -->
+  </div>

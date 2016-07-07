@@ -34,14 +34,18 @@ app.controller('JeopardyController', ['QuestionService', '$scope', function(Ques
 
     $scope.questions = QuestionService.getQuestions();
 
-    // $scope.id= QuestionService.getValues();
 
 
-    $scope.valueClick = function(){
-      let ques = [];
-      console.log('clicked a value');
-      let newQues = QuestionService.getQuestions();
-      console.log(newQues);
+    $scope.valueClick = function() {
+        // let ques = [];
+        console.log('clicked a value');
+        let newQues = QuestionService.getQuestions();
+        let quesVal = QuestionService.getValues();
+        console.log($scope.questions(question));
+        ////need to match question with its question id or match question to category id or match question to its value
+        if ($scope.questions === $scope.values) {
+            console.log('her');
+        }
     }
 
 
@@ -49,36 +53,40 @@ app.controller('JeopardyController', ['QuestionService', '$scope', function(Ques
 
 
 
-app.controller('LoginController',['UserService', '$scope', '$location', function(UserService, $scope, $location) {
+app.controller('LoginController', ['UserService', '$scope', '$location', function(UserService, $scope, $location) {
     let passcode = 'GABE';
     $scope.newUser = {
-      username: "",
+        username: "",
     }
     $scope.username = "";
     $scope.password = "";
-    $scope.loginClick = function(){
-      $scope.username = $scope.newUser.username;
-      if ($scope.password === passcode) {
-        console.log('good password');
-        $location.path('/game') ////DOESNT WORK
-      } else {
-        alert('Your Password is Incorrect, Try Again!')
-      }
+    $scope.loginClick = function() {
+        $scope.username = $scope.newUser.username;
+        if ($scope.password === passcode) {
+            console.log('good password');
+            $location.path('/game') ////DOESNT WORK
+        } else {
+            alert('Your Password is Incorrect, Try Again!')
+        }
     }
 }]);
 
-app.controller('GameOverController', function($scope, $http) {});
+app.controller('GameOverController', function($scope, $location) {
+    $scope.restart = function() {
+        $location.path('/login')
+    }
+});
 
 //////SERVICES//////////////////////////////////////////////////////////////////////////////////////
 app.factory('UserService', function($http) {
     let user = [];
 
-    return  {
-      addUser: function (name) {
-              user.push(name);
-              console.log('this is the user');///NOT WORKING
-          },
-        }
+    return {
+        addUser: function(name) {
+            user.push(name);
+            console.log('this is the user'); ///NOT WORKING
+        },
+    }
 });
 
 
@@ -115,30 +123,30 @@ app.factory('QuestionService', function($http) {
         getQuestions();
     };
 
-    let getQuestions = function () {
-      id.forEach(function(element){
-        $http({
-            method: 'GET',
-            url: `http://jservice.io/api/clues?category=${element}`,
-        }).then(function(response) {
-          let questionText = response.data;
-          questionText.forEach(function (element) {
-            questions.push(element.question);
+    let getQuestions = function() {
+        id.forEach(function(element) {
+            $http({
+                method: 'GET',
+                url: `http://jservice.io/api/clues?category=${element}`,
+            }).then(function(response) {
+                let questionText = response.data;
+                questionText.forEach(function(element) {
+                    questions.push(element.question);
 
-          })
+                })
+            })
         })
-      })
     }
 
     return {
         getCategories: function() {
             return categories;
         },
-        getValues: function(){
-          return values;
+        getValues: function() {
+            return values;
         },
         getQuestions: function() {
-          return questions;
+            return questions;
         },
     };
 
