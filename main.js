@@ -40,7 +40,7 @@ app.controller('JeopardyController', ['QuestionService', '$scope', function(Ques
         console.log('clicked a value');
         let newQues = QuestionService.getQuestions();
         let quesVal = QuestionService.getValues();
-        console.log($scope.questions(question));
+        console.log($scope.questions[1]);
         ////need to match question with its question id or match question to category id or match question to its value
         if ($scope.questions === $scope.values) {
             console.log('her');
